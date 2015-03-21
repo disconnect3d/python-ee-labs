@@ -1,6 +1,5 @@
 import logging
 
-# timestamp, module, log msg
 FORMAT = '%(asctime)-10s %(module)s-10s %(funcName)-10s %(message)s'
 logging.basicConfig(format=FORMAT)
 
