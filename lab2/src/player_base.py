@@ -12,7 +12,6 @@ class PlayerBase:
 
     def __init__(self, marker):
         self._marker = marker
-        self._board_initialized = False
         self._board = None
 
     @property

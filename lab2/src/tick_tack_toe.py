@@ -20,7 +20,7 @@ class TickTackToe(object):
         self.logger.info("Game started with players: {}".format(', '.join(p.name() for p in self._players)))
         self._moves_done = 0
         self._min_moves_to_win = self._board.size * 2 - 1
-        self._max_moves = self._board.size**2
+        self._max_moves = self._board.size ** 2
 
         while True:
             for player in self._players:
@@ -81,9 +81,9 @@ class TickTackToe(object):
             if all(board[i][i] == first for i in xrange(1, size)):
                 return first
 
-        first = board[0][size-1]
+        first = board[0][size - 1]
         if not first == board.empty_marker:
-            if all(board[i][size-1-i] == first for i in xrange(1, size)):
+            if all(board[i][size - 1 - i] == first for i in xrange(1, size)):
                 return first
 
         return board.empty_marker
@@ -93,15 +93,16 @@ class TickTackToe(object):
 
     def get_result(self):
         if self.winner in self._players_markers:
-            winner = self._players_markers[self.winner]
+            winner = self._players_markers[self.winner].name()
             self.logger.info("Won player: {}".format(winner))
             return "Won player {}".format(winner)
 
         self.logger.info("Noone won - tie!")
         return "Tie!"
 
+
 if __name__ == '__main__':
-    def t():
+    def play_test():
         from lab2.src.board import Board
         from lab2.src.player_cpu_random_moves import PlayerCpuRandomMoves
 
@@ -112,4 +113,5 @@ if __name__ == '__main__':
         t = TickTackToe(players=[p1, p2], board=b)
         t.game_loop()
         print (t.get_result())
-    t()
+
+    play_test()

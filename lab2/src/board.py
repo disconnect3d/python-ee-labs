@@ -39,7 +39,7 @@ class Board(object):
         return self._players_markers
 
     def get_index_range(self):
-        return [0, self.size**2]
+        return [0, self.size ** 2]
 
     def put(self, marker, x, y=None):
         self._validate_coords(x, y)

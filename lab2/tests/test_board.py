@@ -124,10 +124,11 @@ class TestBoard(unittest.TestCase):
 
     def __invalid_index_gen(self, size):
         return itertools.chain(xrange(-1, -15, -1),
-                               xrange(size**2, 2*(size**2)))
+                               xrange(size ** 2, 2 * (size ** 2)))
 
     def __invalid_markers(self):
         return None, 1, 2.2, u'łżźć', u's', 'as'
+
 
 if __name__ == '__main__':
     unittest.main()
