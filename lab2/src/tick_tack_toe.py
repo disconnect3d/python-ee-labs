@@ -1,44 +1,34 @@
-from __future__ import print_function
 from constants import Message
 from utils import logger_injector
 
 
 @logger_injector
 class TickTackToe(object):
-    def __init__(self, player1, player2, board):
-        self._player1 = player1
-        self._player2 = player2
+    def __init__(self, players, board):
+        assert len(players) > 1
 
-        self._players_markers = {
-            player1.marker: player1,
-            player2.marker: player2
-        }
-
-        assert len(self._players_markers) == 2
-
+        self._players = players
+        self._players_markers = {player.marker: player for player in self._players}
         self._board = board
-        self._player1._board = self._board
-        self._player2._board = self._board
+
+        for player in self._players:
+            player._board = self._board
 
         self.winner = None
 
     def game_loop(self):
-        self.logger.info("Game started with p1={}, p2={}".format(self._player1, self._player2))
+        self.logger.info("Game started with players: {}".format(', '.join(p.name() for p in self._players)))
         self._moves_done = 0
         self._min_moves_to_win = self._board.size * 2 - 1
         self._max_moves = self._board.size**2
 
         while True:
-            self._make_player_valid_move(self._player1)
-
-            print (self._board.formatted())
-            if self.is_game_over():
-                break
-
-            self._make_player_valid_move(self._player2)
-            print (self._board.formatted())
-            if self.is_game_over():
-                break
+            for player in self._players:
+                self.logger.info("Player {} move.".format(player.name()))
+                self._make_player_valid_move(player)
+                self.logger.info("Game board:\n{}".format(self._board.formatted()))
+                if self.is_game_over():
+                    return
 
     def _make_player_valid_move(self, player):
         x, y = player.move()
@@ -103,6 +93,23 @@ class TickTackToe(object):
 
     def get_result(self):
         if self.winner in self._players_markers:
-            return "Won player {}".format(self._players_markers[self.winner])
+            winner = self._players_markers[self.winner]
+            self.logger.info("Won player: {}".format(winner))
+            return "Won player {}".format(winner)
 
+        self.logger.info("Noone won - tie!")
         return "Tie!"
+
+if __name__ == '__main__':
+    def t():
+        from lab2.src.board import Board
+        from lab2.src.player_cpu_random_moves import PlayerCpuRandomMoves
+
+        p1 = PlayerCpuRandomMoves('x')
+        p2 = PlayerCpuRandomMoves('o')
+        b = Board(players_markers=('x', 'o'), empty_marker=' ', size=5)
+
+        t = TickTackToe(players=[p1, p2], board=b)
+        t.game_loop()
+        print (t.get_result())
+    t()

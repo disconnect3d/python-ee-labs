@@ -11,9 +11,13 @@ class PlayerBase:
     __metaclass__ = ABCMeta
 
     def __init__(self, marker):
-        self.marker = marker
+        self._marker = marker
         self._board_initialized = False
         self._board = None
+
+    @property
+    def marker(self):
+        return self._marker
 
     def move(self):
         if self._board:
@@ -37,3 +41,6 @@ class PlayerBase:
         Implementation of real player controller may need this.
         The messages used are stored in `constants.Messages`"""
         pass
+
+    def name(self):
+        return self.marker
