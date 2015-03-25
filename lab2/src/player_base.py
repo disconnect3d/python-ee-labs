@@ -1,10 +1,13 @@
 from abc import ABCMeta, abstractmethod
 
+from utils import logger_injector
+
 
 class PlayerNotFullyInitializedError(Exception):
     pass
 
 
+@logger_injector
 class PlayerBase:
     """Base class for any player controller"""
 
@@ -19,15 +22,20 @@ class PlayerBase:
         return self._marker
 
     def move(self):
+        self.logger.info("Player {} .move() called".format(self.marker))
+
         if self._board:
             index = self._make_move()
 
             if isinstance(index, int):
+                self.logger.debug("index({}) is index int".format(index))
                 return index, None
             else:
+                self.logger.debug("index({}) is x, y tuple".format(index))
                 return index
 
         else:
+            self.logger.error("Player {} .move() called without initializing board first".format(self.marker))
             raise PlayerNotFullyInitializedError("Player must have board set before calling `make_move`.")
 
     @abstractmethod

@@ -74,8 +74,8 @@ class Board(object):
         return newline.join(('|'.join((self._board[x][y] for x in xrange(self._size))) for y in xrange(self._size)))
 
     def _get_xy_from_index(self, index):
-        x = index / self._size
-        y = index % self._size
+        x = index % self._size
+        y = index / self._size
         return x, y
 
     def __getitem__(self, x):

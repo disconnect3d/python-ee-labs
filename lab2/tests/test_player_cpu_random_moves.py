@@ -2,7 +2,7 @@ import unittest
 
 import mock
 
-from lab2.src.player_cpu_random_moves import PlayerCpuRandomMoves
+from player_cpu_random_moves import PlayerCpuRandomMoves
 
 
 class TestCpuRandomMoves(unittest.TestCase):

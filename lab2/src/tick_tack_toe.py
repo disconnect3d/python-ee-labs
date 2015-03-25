@@ -103,12 +103,12 @@ class TickTackToe(object):
 
 if __name__ == '__main__':
     def play_test():
-        from lab2.src.board import Board
-        from lab2.src.player_cpu_random_moves import PlayerCpuRandomMoves
-
-        p1 = PlayerCpuRandomMoves('x')
+        from board import Board
+        from player_cpu_random_moves import PlayerCpuRandomMoves
+        from player_keyboard_input import PlayerKeyboardInput
+        p1 = PlayerKeyboardInput('x')
         p2 = PlayerCpuRandomMoves('o')
-        b = Board(players_markers=('x', 'o'), empty_marker=' ', size=5)
+        b = Board(players_markers=('x', 'o'), empty_marker=' ', size=3)
 
         t = TickTackToe(players=[p1, p2], board=b)
         t.game_loop()

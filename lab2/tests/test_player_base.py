@@ -1,6 +1,6 @@
 import unittest
 
-from lab2.src.player_base import PlayerBase, PlayerNotFullyInitializedError
+from player_base import PlayerBase, PlayerNotFullyInitializedError
 
 
 class TestPlayer(PlayerBase):

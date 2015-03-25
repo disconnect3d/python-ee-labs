@@ -2,7 +2,7 @@
 import unittest
 import itertools
 
-from lab2.src.board import Board, BoardIndexError, BoardPutMarkerError
+from board import Board, BoardIndexError, BoardPutMarkerError
 
 
 class TestBoard(unittest.TestCase):

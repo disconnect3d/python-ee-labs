@@ -2,7 +2,7 @@ import unittest
 
 import mock
 
-from lab2.src.tick_tack_toe import TickTackToe
+from tick_tack_toe import TickTackToe
 
 
 class TestTickTackToe(unittest.TestCase):
